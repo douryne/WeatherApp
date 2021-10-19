@@ -27,5 +27,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npx rollup
+    - run: npm i rollup
     - run: npm run build rollup.config.js --if-present
