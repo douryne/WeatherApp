@@ -9,19 +9,19 @@ const watch = process.env.ROLLUP_WATCH
 export default {
   input: 'src/app.ts',
   output: {
-    file: 'dist/app.js',
+    file: './public/dist/app.js',
     format: 'cjs'
   },
   plugins: [
     typescript(),
     !watch && terser(),
     css({
-      output: './dist/main.css',
-      minify: watch
+      output: './public/dist/main.css',
+      minify: !watch
     }),
     watch && serve({
       open: true,
-      contentBase: ['public', 'dist'],
+      contentBase: 'public',
       host: 'localhost',
       port: '8080'
     }),
