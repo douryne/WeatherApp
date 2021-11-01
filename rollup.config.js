@@ -3,11 +3,12 @@ import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import {terser} from "rollup-plugin-terser";
 import css from "rollup-plugin-import-css";
+import dotenv from "rollup-plugin-dotenv";
 
 const watch = process.env.ROLLUP_WATCH
 
 export default {
-  input: 'src/app.ts',
+  input: 'client/app.ts',
   output: {
     file: './public/dist/app.js',
     format: 'cjs'
@@ -19,6 +20,7 @@ export default {
       output: './public/dist/main.css',
       minify: !watch
     }),
+    dotenv(),
     watch && serve({
       open: true,
       contentBase: 'public',

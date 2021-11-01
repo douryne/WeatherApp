@@ -6,14 +6,19 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "deploy": "gh-pages -d public"
+    "server": "nodemon server/server.js",
+    "all": "concurrently \"nodemon server/server.js\" \"rollup -c -w\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",
+    "axios": "^0.24.0",
+    "concurrently": "^6.3.0",
+    "dotenv": "^10.0.0",
     "gh-pages": "^3.2.3",
+    "nodemon": "^2.0.14",
     "rollup-plugin-css-porter": "^1.0.2",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-postcss": "^4.0.1",
@@ -23,6 +28,9 @@
   },
   "dependencies": {
     "@henrikjoreteg/rollup-plugin-css": "^2.0.0",
+    "express": "^4.17.1",
+    "latest-version": "^6.0.0",
+    "rollup-plugin-dotenv": "^0.3.0",
     "rollup-plugin-import-css": "^3.0.2",
     "rollup-plugin-minify-tagged-css-template": "0.0.2",
     "tslib": "^2.3.1"
