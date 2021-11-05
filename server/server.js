@@ -1,8 +1,7 @@
 const express = require('express');
 
-if (process.env.NODE_ENV !== "production") {
-    const axios = require('axios');
-}
+const axios = require('axios');
+
 const path = require('path')
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
