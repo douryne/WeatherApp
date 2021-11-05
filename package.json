@@ -10,7 +10,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "server": "nodemon server/server.js",
-    "all": "concurrently \"nodemon server/server.js\" \"rollup -c -w\""
+    "all": "concurrently \"nodemon server/server.js\" \"rollup -c -w\"",
+    "start": "concurrently \"nodemon server/server.js\" \"rollup -c\""
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,7 @@
     "@henrikjoreteg/rollup-plugin-css": "^2.0.0",
     "express": "^4.17.1",
     "latest-version": "^6.0.0",
+    "path": "^0.12.7",
     "rollup-plugin-dotenv": "^0.3.0",
     "rollup-plugin-import-css": "^3.0.2",
     "rollup-plugin-minify-tagged-css-template": "0.0.2",

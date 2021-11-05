@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path')
 require("dotenv").config();
 
 const apiKey = `${process.env.WEATHER_OPEN_API_KEY}`;
@@ -9,6 +10,7 @@ const PORT = 3000;
 const app = express();
 
 app.use(express.json());
+app.use(express.static('public'))
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -16,6 +18,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+})
 
 app.get('/getWeather', async (req, res) => {
     let city = req.query.city;
