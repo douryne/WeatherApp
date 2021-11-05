@@ -2,6 +2,9 @@
   "name": "typescript-rollup",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
