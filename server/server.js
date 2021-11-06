@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const apiKey = `${process.env.WEATHER_OPEN_API_KEY}`;
-const PORT = process.env.PORT;
+const PORT = `${process.env.PORT}`;
 const app = express();
 
 app.use(express.json());
