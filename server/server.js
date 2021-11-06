@@ -1,9 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path')
-if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
-}
+require("dotenv").config();
 
 const apiKey = `${process.env.WEATHER_OPEN_API_KEY}`;
 const PORT = `${process.env.PORT}`;
