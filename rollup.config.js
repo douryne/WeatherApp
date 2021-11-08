@@ -21,10 +21,10 @@ export default {
       output: './public/dist/main.css',
       minify: !watch
     }),
-    dotenv(),
     replace({
       'process.env.PORT': process.env.PORT,
     }),
+    dotenv(),
     watch && serve({
       open: true,
       contentBase: 'public',
