@@ -1,4 +1,6 @@
 import './main.css'
+import dotenv from 'dotenv';
+dotenv.config();
 
 let city = {
     name: 'Tokyo'
