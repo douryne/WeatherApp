@@ -1,5 +1,4 @@
 import './main.css'
-require("dotenv").config();
 
 let city = {
     name: 'Tokyo'
