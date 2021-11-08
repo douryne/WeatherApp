@@ -3,7 +3,8 @@ import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import {terser} from "rollup-plugin-terser";
 import css from "rollup-plugin-import-css";
-import dotenv from "rollup-plugin-dotenv";
+import dotenv from 'dotenv';
+dotenv.config();
 import replace from '@rollup/plugin-replace';
 
 const watch = process.env.ROLLUP_WATCH
@@ -22,9 +23,9 @@ export default {
       minify: !watch
     }),
     replace({
+      'process.env.WEATHER_OPEN_API_KEY': '"' + process.env.WEATHER_OPEN_API_KEY + '"',
       'process.env.PORT': process.env.PORT,
     }),
-    dotenv(),
     watch && serve({
       open: true,
       contentBase: 'public',
