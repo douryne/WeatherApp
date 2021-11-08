@@ -4,6 +4,7 @@ import livereload from 'rollup-plugin-livereload';
 import {terser} from "rollup-plugin-terser";
 import css from "rollup-plugin-import-css";
 import dotenv from "rollup-plugin-dotenv";
+import replace from '@rollup/plugin-replace';
 
 const watch = process.env.ROLLUP_WATCH
 
@@ -21,6 +22,9 @@ export default {
       minify: !watch
     }),
     dotenv(),
+    replace({
+      'process.env.PORT': process.env.PORT,
+    }),
     watch && serve({
       open: true,
       contentBase: 'public',
