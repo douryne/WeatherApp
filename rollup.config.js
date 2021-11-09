@@ -18,8 +18,8 @@ export default {
   },
   plugins: [
     replace({
-      'PORT': JSON.stringify(process.env.PORT),
-      'WEATHER_OPEN_API_KEY': JSON.stringify(process.env.WEATHER_OPEN_API_KEY),
+      'process.env.PORT': JSON.stringify(process.env.PORT),
+      'process.env.WEATHER_OPEN_API_KEY': JSON.stringify(process.env.WEATHER_OPEN_API_KEY),
     }),
     typescript(),
     !watch && terser(),
