@@ -10,8 +10,6 @@ dotenv.config();
 
 const watch = process.env.ROLLUP_WATCH
 
-console.log("---------------------------" + process.env.PORT + "---------------------------------------")
-
 export default {
   input: 'client/app.ts',
   output: {
