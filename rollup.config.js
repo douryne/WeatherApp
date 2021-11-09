@@ -3,10 +3,6 @@ import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import {terser} from "rollup-plugin-terser";
 import css from "rollup-plugin-import-css";
-import replace from '@rollup/plugin-replace';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const watch = process.env.ROLLUP_WATCH
 
@@ -17,10 +13,6 @@ export default {
     format: 'cjs'
   },
   plugins: [
-    replace({
-      'process.env.PORT': JSON.stringify(process.env.PORT),
-      'process.env.WEATHER_OPEN_API_KEY': JSON.stringify(process.env.WEATHER_OPEN_API_KEY),
-    }),
     typescript(),
     !watch && terser(),
     css({
