@@ -1,7 +1,7 @@
 import './main.css'
 
 class Weather {
-    private static cityName: string = 'Moscow';
+    private static cityName: string = '';
     private static searchBar = <HTMLInputElement>document.querySelector('.search-bar');
 
     private static cityElem = <Element>document.querySelector('.city');
@@ -16,6 +16,7 @@ class Weather {
         let json = await data.json();
 
         let weatherData = {
+            cityName: json.name,
             humidity: json.main.humidity,
             description: json.weather[0].main,
             windSpeed: json.wind.speed,
@@ -28,12 +29,15 @@ class Weather {
     }
     async displayWeatherData() {
         const weatherData =  await this.getWeatherData();
-        Weather.cityElem.innerHTML = `Weather in ${Weather.cityName}`;
+        Weather.cityElem.innerHTML = `Weather in ${weatherData.cityName}`;
         Weather.tempElem.innerHTML = `${Math.round(weatherData.temp)}°C`;
         Weather.descriptionELem.innerHTML = weatherData.description;
         Weather.humidityELem.innerHTML = `Humidity: ${weatherData.humidity}%`;
         Weather.windSpeedElem.innerHTML = `Wind speed: ${weatherData.windSpeed.toFixed(1)} m/s`;
-        Weather.iconElem.src = `http://openweathermap.org/img/w/${weatherData.icon}.png`
+        Weather.iconElem.src = `http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`
+
+        const weatherElem = <Element>document.querySelector('.weather');
+        weatherElem.classList.replace('loading', 'loaded')
     }
 
     setCityName() : void {
@@ -56,5 +60,13 @@ searchBtn.addEventListener('click', () => {
     weather.setCityName();
     weather.displayWeatherData();
     searchBar.value = '';
+})
+
+searchBar.addEventListener('keyup', (event: KeyboardEvent) => {
+    if(event.key === 'Enter') {
+        weather.setCityName();
+        weather.displayWeatherData();
+        searchBar.value = '';
+    }
 })
 

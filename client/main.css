@@ -14,7 +14,6 @@ body {
   max-width: 500px;
   background-color: #000000b6;
   border-radius: 50px;
-  padding: 3em;
   color: #fff;
   margin: 0 0 100px 0;
 }
@@ -25,6 +24,10 @@ body {
 
 .card span {
   display: block;
+}
+
+.card .search {
+  margin: 50px;
 }
 
 .card .search-bar {
@@ -60,6 +63,16 @@ body {
   background-color: #424242;
 }
 
-.card .weather {
+.card .weather.loaded {
   padding: 0 0.3em;
+  margin: 50px;
+}
+
+.card .weather.loading {
+  display: none;
+}
+
+.weather .description-wrapper {
+  display: flex;
+  align-items: center;
 }
