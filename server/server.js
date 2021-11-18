@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-const path = require('path')
+const path = require('path');
 require("dotenv").config();
 
 const apiKey = `${process.env.WEATHER_OPEN_API_KEY}`;
@@ -26,7 +26,7 @@ app.get('/getWeather', async (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`SERVER ON PORT ${PORT}`)
+    console.log(`SERVER ON PORT ${PORT}`);
 })
 
 
