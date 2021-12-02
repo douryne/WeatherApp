@@ -1,3 +1,7 @@
+:root {
+  --visibility: hidden;
+}
+
 body {
   background-color: rgb(144, 140, 140);
   display: flex;
@@ -12,14 +16,14 @@ body {
 }
 
 .modal {
-  top: 20px;
+  visibility: var(--visibility);
   position: absolute;
   z-index: 1;
   background-color: #fff;
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 1rem;
   border-radius: 20px;
-  padding: 20px 25px;
+  padding: 15px 30px;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   box-shadow: 0 0 100px 10px rgba(0, 0, 0, .2);;

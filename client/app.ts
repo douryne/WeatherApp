@@ -83,12 +83,15 @@ class Weather {
     alertError(error: string) : void {
         const alert = <HTMLElement>document.querySelector('.modal');
         const alertText = <Element>document.querySelector('.error');
+        const root = document.documentElement;
 
         alertText.innerHTML = `${error}`;
+        root.style.setProperty('--visibility', 'visible');
         alert.classList.toggle('activate');
         
-        setTimeout(() => { 
+        setTimeout(() => {
             alert.classList.toggle('activate');
+            setTimeout(() => root.style.setProperty('--visibility', 'hidden'), 2000);          
         }, 3000)
     }
 }
