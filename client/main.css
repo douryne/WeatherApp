@@ -13,6 +13,22 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-position: bottom;
   background-size: cover;
+  overflow: hidden;
+}
+
+.snowflake {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: -20px;
+
+  animation: fall 10s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(105vh);
+  }
 }
 
 .modal {

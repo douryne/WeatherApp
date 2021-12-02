@@ -46,6 +46,7 @@ class Weather {
         Weather.iconElem.src = `http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
         Weather.dateElem.innerHTML = `${this.dateManage(currDate)}`;
 
+        if(weatherData.description === 'Snow') setInterval(this.createSnowFlake, 50);
         this.changeBackground(weatherData.description);
         const weatherElem = <Element>document.querySelector('.weather');
         weatherElem.classList.replace('loading', 'loaded');
@@ -92,6 +93,23 @@ class Weather {
         setTimeout(() => {
             alert.classList.toggle('activate');
             setTimeout(() => root.style.setProperty('--visibility', 'hidden'), 2000);          
+        }, 3000)
+    }
+
+    createSnowFlake() {
+        const snowFlake = document.createElement('div');
+        snowFlake.classList.add('snowflake');
+        
+        snowFlake.style.left = `${Math.random() * window.innerWidth}px`;
+        snowFlake.style.animationDuration = `${Math.random() * 2 + 1}s`;
+        snowFlake.style.opacity = `${Math.random()}`;
+        snowFlake.style.padding = `${Math.random() * 5 + 5}px`;
+        snowFlake.style.filter = `blur(${Math.random() - 0.2}em)`
+
+        document.body.appendChild(snowFlake);
+        
+        setTimeout(() => {
+            snowFlake.remove();
         }, 3000)
     }
 }
