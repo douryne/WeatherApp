@@ -8,10 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "server": "nodemon server/server.js",
-    "all": "concurrently \"nodemon server/server.js\" \"rollup -c -w\"",
-    "start": "concurrently \"rollup -c\" \"nodemon server/server.js\""
+    "dev": "concurrently \"nodemon server/server.js\" \"rollup -c -w\""
   },
   "keywords": [],
   "author": "",
@@ -20,7 +17,6 @@
     "@rollup/plugin-typescript": "^8.3.0",
     "nodemon": "^2.0.14",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.4.4",
     "rollup-plugin-import-css": "^3.0.2",

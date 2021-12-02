@@ -20,7 +20,13 @@ app.use(function(req, res, next) {
 app.get('/getWeather', async (req, res) => {
     let city = req.query.city;
     
-    let data = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+    let data
+    try {
+        data = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+    } catch(e) {
+        res.json(e);
+        return 0;
+    }
     res.json(data.data);
 });
 
