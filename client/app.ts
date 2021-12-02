@@ -34,7 +34,7 @@ class Weather {
         const currDate = this.getCurrentDate();
 
         if(typeof weatherData === 'string') {
-            alert(weatherData);
+            this.alertError(weatherData);
             return 0;
         }
         
@@ -80,6 +80,17 @@ class Weather {
         document.body.style.backgroundImage = `url('img/${description}.jpg')`;
     }
 
+    alertError(error: string) : void {
+        const alert = <HTMLElement>document.querySelector('.modal');
+        const alertText = <Element>document.querySelector('.error');
+
+        alertText.innerHTML = `${error}`;
+        alert.classList.toggle('activate');
+        
+        setTimeout(() => { 
+            alert.classList.toggle('activate');
+        }, 3000)
+    }
 }
 
 const weather = new Weather();

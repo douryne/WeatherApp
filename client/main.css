@@ -11,13 +11,30 @@ body {
   background-size: cover;
 }
 
+.modal {
+  top: 20px;
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  font-style: italic;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  padding: 20px 25px;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  box-shadow: 0 0 100px 10px rgba(0, 0, 0, .2);;
+}
+
+.modal.activate {
+  opacity: 1;
+}
+
 .card {
   width: 100%;
   max-width: 500px;
   background-color: #000000c2;
   border-radius: 50px;
   color: #fff;
-  margin: 0 0 100px 0;
 }
 
 .card .city, .temperature {
@@ -66,7 +83,7 @@ body {
 }
 
 .card .weather.loaded {
-  padding: 0 0.3em;
+  padding: 0 1em;
   margin: 50px;
 }
 
@@ -81,4 +98,5 @@ body {
 .weather .description-wrapper {
   display: flex;
   align-items: center;
+  margin-left: -15px;
 }
