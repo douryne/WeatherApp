@@ -12,6 +12,8 @@ class Weather {
     private static iconElem = <HTMLImageElement>document.querySelector('.icon');
     private static dateElem = <Element>document.querySelector('.date');
 
+    private static timerID: NodeJS.Timer;
+
     async getWeatherData() {
         let data = await fetch(`/getWeather?city=${Weather.cityName}`);
         let json = await data.json();
@@ -46,7 +48,8 @@ class Weather {
         Weather.iconElem.src = `http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
         Weather.dateElem.innerHTML = `${this.dateManage(currDate)}`;
 
-        if(weatherData.description === 'Snow') setInterval(this.createSnowFlake, 50);
+        if(weatherData.description === 'Snow')  Weather.timerID = setInterval(this.createSnowFlake, 100);
+        else clearInterval(Weather.timerID);
         this.changeBackground(weatherData.description);
         const weatherElem = <Element>document.querySelector('.weather');
         weatherElem.classList.replace('loading', 'loaded');
@@ -100,14 +103,14 @@ class Weather {
         const snowFlake = document.createElement('div');
         snowFlake.classList.add('snowflake');
         
-        snowFlake.style.left = `${Math.random() * window.innerWidth}px`;
+        snowFlake.style.left = `${Math.random() * window.innerWidth - 15}px`;
         snowFlake.style.animationDuration = `${Math.random() * 2 + 1}s`;
         snowFlake.style.opacity = `${Math.random()}`;
         snowFlake.style.padding = `${Math.random() * 5 + 5}px`;
         snowFlake.style.filter = `blur(${Math.random() - 0.2}em)`
 
         document.body.appendChild(snowFlake);
-        
+
         setTimeout(() => {
             snowFlake.remove();
         }, 3000)
