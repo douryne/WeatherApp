@@ -23,9 +23,14 @@ app.get('/getWeather', async (req, res) => {
     let data
     try {
         data = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
-    } catch(e) {
-        res.json(e);
-        return 0;
+    } catch(error) {
+        const status = error?.response?.status;
+        if(status) {
+            res.status(status).end(error.message);
+        } else {
+            res.status(500).end(error.message);
+        }
+        return;
     }
     res.json(data.data);
 });

@@ -16,29 +16,28 @@ class Weather {
     private static timerID: NodeJS.Timer;
 
     async getWeatherData(city: string) {
-        let data = await fetch(`/getWeather?city=${city}`);
-        let json = await data.json();
-
-        if(json.message) return json.message;
+        let response = await fetch(`/getWeather?city=${city}`);
+        if(!response.ok) throw new Error(await response.text())
+        let data = await response.json();
 
         let weatherData = {
-            cityName: json.name,
-            humidity: json.main.humidity,
-            description: json.weather[0].main,
-            windSpeed: json.wind.speed,
-            temp: json.main.temp,
-            icon: json.weather[0].icon
+            cityName: data.name,
+            humidity: data.main.humidity,
+            description: data.weather[0].main,
+            windSpeed: data.wind.speed,
+            temp: data.main.temp,
+            icon: data.weather[0].icon
         }
         return weatherData;
         
     }
     async displayWeatherData() {
+        let errorMessage = null;
         const cityName = Weather.searchBar.value;
-        const weatherData =  await this.getWeatherData(cityName);
+        const weatherData =  await this.getWeatherData(cityName).catch((error) => errorMessage = error.message);
 
-        if(typeof weatherData === 'string') {
-            this.alertError(weatherData);
-            return 0;
+        if(errorMessage) {
+            return this.alertError(errorMessage);
         }
         
         Weather.cityElem.innerHTML = `Weather in ${weatherData.cityName}`;
@@ -115,7 +114,7 @@ searchBtn.addEventListener('click', () => {
     searchBar.value = '';
 })
 
-searchBar.addEventListener('keyup', (event: KeyboardEvent) => {
+searchBar.addEventListener('keyup', (event) => {
     if(event.key === 'Enter') {
         weather.displayWeatherData();
         searchBar.value = '';
