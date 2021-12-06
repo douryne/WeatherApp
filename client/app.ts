@@ -1,7 +1,6 @@
 import './main.css'
 
 class Weather {
-    private static cityName: string = '';
     private static searchBar = <HTMLInputElement>document.querySelector('.search-bar');
     private static cityElem = <Element>document.querySelector('.city');
     private static tempElem = <Element>document.querySelector('.temperature');
@@ -16,8 +15,8 @@ class Weather {
 
     private static timerID: NodeJS.Timer;
 
-    async getWeatherData() {
-        let data = await fetch(`/getWeather?city=${Weather.cityName}`);
+    async getWeatherData(city: string) {
+        let data = await fetch(`/getWeather?city=${city}`);
         let json = await data.json();
 
         if(json.message) return json.message;
@@ -34,7 +33,8 @@ class Weather {
         
     }
     async displayWeatherData() {
-        const weatherData =  await this.getWeatherData();
+        const cityName = Weather.searchBar.value;
+        const weatherData =  await this.getWeatherData(cityName);
 
         if(typeof weatherData === 'string') {
             this.alertError(weatherData);
@@ -53,10 +53,6 @@ class Weather {
         else clearInterval(Weather.timerID);
         this.changeBackground(weatherData.description);
         Weather.weatherElem.classList.replace('loading', 'loaded');
-    }
-
-    setCityName() {
-        Weather.cityName = Weather.searchBar.value;
     }
 
     getSearchBar() {
@@ -115,14 +111,12 @@ const searchBtn = <HTMLInputElement>document.querySelector('.search button');
 
 
 searchBtn.addEventListener('click', () => {
-    weather.setCityName();
     weather.displayWeatherData();
     searchBar.value = '';
 })
 
 searchBar.addEventListener('keyup', (event: KeyboardEvent) => {
     if(event.key === 'Enter') {
-        weather.setCityName();
         weather.displayWeatherData();
         searchBar.value = '';
     }
