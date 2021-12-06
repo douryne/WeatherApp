@@ -35,7 +35,6 @@ class Weather {
     }
     async displayWeatherData() {
         const weatherData =  await this.getWeatherData();
-        const currDate = this.getCurrentDate();
 
         if(typeof weatherData === 'string') {
             this.alertError(weatherData);
@@ -48,7 +47,7 @@ class Weather {
         Weather.humidityELem.innerHTML = `Humidity: ${weatherData.humidity}%`;
         Weather.windSpeedElem.innerHTML = `Wind speed: ${weatherData.windSpeed.toFixed(1)} m/s`;
         Weather.iconElem.src = `http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
-        Weather.dateElem.innerHTML = `${this.dateManage(currDate)}`;
+        Weather.dateElem.innerHTML = `${this.getCurrentDate()}`;
 
         if(weatherData.description === 'Snow')  Weather.timerID = setInterval(this.createSnowFlake, 100);
         else clearInterval(Weather.timerID);
@@ -65,20 +64,13 @@ class Weather {
     }
 
     getCurrentDate() {
-        return new Date();
-    }
-
-    dateManage(dateObj: Date) {
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'];
-
-        const year = dateObj.getFullYear();
-        const month = months[dateObj.getMonth()];
-        const date = dateObj.getDate();
-        const day = days[dateObj.getDay()];
-
-        return `${date} ${month} (${day}) ${year}`;
+        const formatter = new Intl.DateTimeFormat("en", {
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long',
+            year: 'numeric',
+        });
+        return formatter.format(new Date());
     }
 
     changeBackground(description: string) {
