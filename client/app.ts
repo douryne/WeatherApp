@@ -55,19 +55,19 @@ class Weather {
         weatherElem.classList.replace('loading', 'loaded');
     }
 
-    setCityName() : void {
+    setCityName() {
         Weather.cityName = Weather.searchBar.value;
     }
 
-    getSearchBar() : HTMLInputElement {
+    getSearchBar() {
         return Weather.searchBar
     }
 
-    getCurrentDate() : Date {
+    getCurrentDate() {
         return new Date();
     }
 
-    dateManage(dateObj: Date) : string {
+    dateManage(dateObj: Date) {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'];
@@ -80,11 +80,11 @@ class Weather {
         return `${date} ${month} (${day}) ${year}`;
     }
 
-    changeBackground(description: string) : void {
+    changeBackground(description: string) {
         document.body.style.backgroundImage = `url('img/${description}.jpg')`;
     }
 
-    alertError(error: string) : void {
+    alertError(error: string) {
         const alert = <HTMLElement>document.querySelector('.modal');
         const alertText = <Element>document.querySelector('.error');
         const root = document.documentElement;
