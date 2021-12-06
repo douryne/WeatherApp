@@ -3,7 +3,6 @@ import './main.css'
 class Weather {
     private static cityName: string = '';
     private static searchBar = <HTMLInputElement>document.querySelector('.search-bar');
-
     private static cityElem = <Element>document.querySelector('.city');
     private static tempElem = <Element>document.querySelector('.temperature');
     private static descriptionELem = <Element>document.querySelector('.description');
@@ -11,6 +10,9 @@ class Weather {
     private static windSpeedElem = <Element>document.querySelector('.wind');
     private static iconElem = <HTMLImageElement>document.querySelector('.icon');
     private static dateElem = <Element>document.querySelector('.date');
+    private static weatherElem = <Element>document.querySelector('.weather');
+    private static alert = <HTMLElement>document.querySelector('.modal');
+    private static alertText = <Element>document.querySelector('.error');
 
     private static timerID: NodeJS.Timer;
 
@@ -51,8 +53,7 @@ class Weather {
         if(weatherData.description === 'Snow')  Weather.timerID = setInterval(this.createSnowFlake, 100);
         else clearInterval(Weather.timerID);
         this.changeBackground(weatherData.description);
-        const weatherElem = <Element>document.querySelector('.weather');
-        weatherElem.classList.replace('loading', 'loaded');
+        Weather.weatherElem.classList.replace('loading', 'loaded');
     }
 
     setCityName() {
@@ -85,16 +86,14 @@ class Weather {
     }
 
     alertError(error: string) {
-        const alert = <HTMLElement>document.querySelector('.modal');
-        const alertText = <Element>document.querySelector('.error');
         const root = document.documentElement;
 
-        alertText.innerHTML = `${error}`;
+        Weather.alertText.innerHTML = `${error}`;
         root.style.setProperty('--visibility', 'visible');
-        alert.classList.toggle('activate');
+        Weather.alert.classList.toggle('activate');
         
         setTimeout(() => {
-            alert.classList.toggle('activate');
+            Weather.alert.classList.toggle('activate');
             setTimeout(() => root.style.setProperty('--visibility', 'hidden'), 2000);          
         }, 3000)
     }
